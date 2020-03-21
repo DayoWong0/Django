@@ -80,10 +80,12 @@ def create(request):
     b.bpub_date = date(1990, 1, 1)
     # 保存到数据库
     b.save()
-    return HttpResponse('ok')
+    # return HttpResponse('ok')
 
-    # 重定向到首页     返回到index页面
+    # 重定向 
     # return HttpResponseRedirect('/index')
+    # 简单写法
+    return redirect('/index') 
 
 
 def delete(request, bid):
