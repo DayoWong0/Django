@@ -24,16 +24,16 @@ Markdown
     DecimalField() 比FloatField()精确 FloatField存入取出可能有差异
     涉及金钱等需要精确的用DecimalField
     
-1 ```DateField(auto_now_add = true)``` 
+    DateField(auto_now_add = true)
 ####### 默认赋值为当前时间,记录创建时间   
 
-2 ```DateField(auto_now = true)```
-####### 默认赋值为当前时间,记录最后一次更新数据的时间  
-修改了此对象的任何数据都要更新时间    
+    DateField(auto_now = true)
+####### 默认赋值为当前时间,记录最后一次更新数据的时间,修改了此对象的任何数据都要更新时间    
     
-误区:两者不能同时使用  
+两者不能同时使用  
     
-    TimeField DateTimeField参数同上
+TimeField DateTimeField参数同上
+
     
     
 
