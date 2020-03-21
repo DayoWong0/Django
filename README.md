@@ -142,9 +142,19 @@ BookInfo.objects.aggregate(Count('id')) # .all()可以省略
 
 返回值为 {'id_count':5}  为字典
    
+算总和
 ```
 BookInfo.objects.aggregate(Sum('bread'))
 ```
+Count() count函数返回数字,其余aggregate(例如这里面的Count)返回字典   
+count()使用:  
+```BookInfo.objects.filter(id__gt=3).count()```
+
+
+
+总结:查询函数
+
+![avatar](templates/mdpic/sql.png)
 
 
 
