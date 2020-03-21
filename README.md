@@ -18,21 +18,21 @@ Markdown
     一头一尾
     
 
-数据库
+###数据库
 
-    django选项(models.py 导入的models包内)  
-        DecimalField() 比FloatField()精确 FloatField存入取出可能有差异
-        涉及金钱等需要精确的用DecimalField
-        
-        DateField(auto_now_add = true)
-    默认赋值为当前时间,记录创建时间   
+django选项(models.py 导入的models包内)  
+    DecimalField() 比FloatField()精确 FloatField存入取出可能有差异
+    涉及金钱等需要精确的用DecimalField
     
-        DateField(auto_now = true)
-    默认赋值为当前时间,记录最后一次更新数据的时间,修改了此对象的任何数据都要更新时间    
-        
-    两者不能同时使用  
-        
-    TimeField(小时分秒) DateTimeField(年月日时分秒) 参数同上
+    DateField(auto_now_add = true)
+默认赋值为当前时间,记录创建时间   
+
+    DateField(auto_now = true)
+默认赋值为当前时间,记录最后一次更新数据的时间,修改了此对象的任何数据都要更新时间    
+    
+两者不能同时使用  
+    
+TimeField(小时分秒) DateTimeField(年月日时分秒) 参数同上
     
         
         
