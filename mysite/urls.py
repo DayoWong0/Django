@@ -27,4 +27,5 @@ urlpatterns = [
 
     # 正则表达式匹配
     re_path(r'^', include('booktest.urls'))  # 包含booktest应用中的urls文件
+
 ]

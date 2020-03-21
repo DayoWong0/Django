@@ -15,6 +15,14 @@ class BookInfo(models.Model):  # 必须继承于model.Model才行
     btitle = models.CharField(max_length=20)
     # 图书出版日期 DateField日期类型
     bpub_date = models.DateField()
+    # 阅读量
+    bread = models.IntegerField(default=0)
+    # 评论量
+    bcomment = models.IntegerField(default=0)
+    # 删除标记 不做真正的删除 软删除
+    isDelete = models.BooleanField(default=False)
+    # 加这个可以使用BookInfo.object. 不加不行
+    objects = models.Manager()
 
     def __str__(self):
         # 返回书名
@@ -30,21 +38,22 @@ class HeroInfo(models.Model):
 
     # 性别 Boolean bool类型 default指定默认值 false代表男
     hgender = models.BooleanField(default=False)
-
+    # 备注
     hcomment = models.CharField(max_length=128)
+    # 关系属性 外键
+    # on_delete=models.CASCADE 需要加这个属性
+    # 关系属性对应的表的字段名格式: 关系属性名_id
+    # 关联对象赋值 直接些外键的名字就可以了
+    hbook = models.ForeignKey('BookInfo', on_delete=models.CASCADE)
+    # 删除标记 不做真正的删除 软删除
+    isDelete = models.BooleanField(default=False)
+
+    # 加这个可以使用BookInfo.object. 不加不行
+    objects = models.Manager()
 
     def __str__(self):
         # 返回书名
         return self.hname
-
-    # 关系属性 外键
-
-    # on_delete=models.CASCADE 需要加这个属性
-    # 关系属性对应的表的字段名格式: 关系属性名_id
-
-    # 关联对象赋值 直接些外键的名字就可以了
-
-    hbook = models.ForeignKey('BookInfo', on_delete=models.CASCADE)
 
     """
 #   两个表都是空的     
@@ -114,6 +123,15 @@ Migrations for 'booktest':
 
 
 2.执行迁移生成表 python manage.py migrate
+    
+    
+    
+    
+一起执行:
+
+python manage.py makemigrations
+python manage.py migrate   
+
     
     '''
 

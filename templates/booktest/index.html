@@ -2,24 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>模板文件</title>
+    <title>图书信息</title>
 </head>
 <body>
 
-<h1>这是一个模板文件</h1>
-使用模板变量:<br>
-{{content}}<br>
-
-使用列表<br>
-{{list}}<br>
-
-for循环:<br>
+<a href="/create">新增</a>
 <ul>
-    {%for i in list %}
-    <li>{{i}}</li>
-    {%endfor%}
-
+    {% for book in books %}
+        <li>{{book}}<a href="/delete{{book.id}}">--删除</a> </li>
+    {%  endfor %}
 </ul>
+
 
 
 </body>
