@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'bj18',  # 数据库名字 数据库需要手动创建
         'USER': 'root',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',  # 数据库ip
+        'HOST': 'localhost',  # 数据库ip
         'PORT': 3306,
 
     }
