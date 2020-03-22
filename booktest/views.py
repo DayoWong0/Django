@@ -2,7 +2,7 @@ from datetime import date
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from booktest.models import BookInfo  # 导入图书模型类
+from booktest.models import BookInfo, AreaInfo  # 导入图书模型类
 from django.template import loader, RequestContext
 
 # Create your views here.
@@ -97,5 +97,13 @@ def delete(request, bid):
     # 重定向 
     # return HttpResponseRedirect('/index')
     # 简单写法
-    return redirect('/index') 
+    return redirect('/index')
+
+
+def areas(request):
+    """获取广州市的上下级地区"""
+#     获取广州的信息
+    area = AreaInfo.objects.get(atittle='广州市')
+#     查询广州市的上级地区
+
 

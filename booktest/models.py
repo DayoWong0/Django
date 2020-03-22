@@ -62,6 +62,8 @@ class AreaInfo(models.Model):
     atitle = models.CharField(max_length=20)
     #     关系属性,代表当前地区父级地区 自关联
     aParent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)  # null数据库里可为空, blank管理页面可为空
+    objects = models.Manager()
+
 
 
 """

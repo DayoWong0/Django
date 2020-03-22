@@ -328,12 +328,18 @@ b.hbook返回对象
 ### 出错排查
 -  TypeError: __init__() missing 1 required positional argument: 'on_delete'  
 描述:执行出错
-```
+```python
 python manage.py makemigrations
 ```
 外键选项加上:
 on_delete=models.CASCADE  
 [详细解决方法](https://blog.csdn.net/yjk13703623757/article/details/79452968)
+
+- objects选项没提示
+解决: 在models.py类文件中加入
+```python
+objects = models.Manager()
+```
 
 
 
