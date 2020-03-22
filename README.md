@@ -25,19 +25,21 @@ DecimalField() 比FloatField()精确 FloatField
 存入取出可能有差异涉及金钱等需要精确的用DecimalField
     
 
-- 默认赋值为当前时间,记录创建时间  
+- auto_now_add = true 参数: 默认赋值为当前时间,记录创建时间  
+
+例如:
 ```python
 DateField(auto_now_add = true) 
 ```
-- 默认赋值为当前时间,记录更新时间  
+- auto_now = true 参数: 默认赋值为当前时间,记录更新时间  
 (修改了此对象的任何数据都要更新时间) 
 ```python
 DateField(auto_now = true)
 ```
-
-两者不能同时使用  
+注:
+- 两者不能同时使用  
     
-TimeField(小时分秒)   
+- TimeField(小时分秒)  
 DateTimeField(年月日时分秒)   
 参数同上
     
@@ -54,24 +56,21 @@ DateTimeField(年月日时分秒)
     exclude:返回不满足的  
     order_by:对查询结果排序  
 #### 方法使用 
-​    查询条件使用格式:  
-​    模块类属性名__条件名=值  
+查询方法使用格式: 模块类属性名__条件名=值  
 ​    
 1.等于:exact
 
 ```python
 BookInfo.objects.get(id__exact=1)  
 ```
+
 简写:  
 ```python
 BookInfo.objects.get(id=1)
 ```
 
 2.模糊查询  
-包含关键词:  
-contains  
-endswith  
-startwith 
+包含关键词:  contains  endswith  startwith 
 
 - 查询包含 传 的书名
 ``` python
@@ -105,12 +104,11 @@ BookInfo.objecrts.filter(id__in=[1,3,5])
 ```
 
 
-5.比较查询
+5.比较查询  
 gt(great than)  
 lt(less than)   
-
-gte(equal) 大于等于  
-lte        小于等于  
+gte(great than equal) 大于等于  
+lte(less than equal) 小于等于  
 
 - 查询 id 大于3的书  
 
@@ -122,7 +120,7 @@ BookInfo.objecrts.filter(id__gt=3)
 ```python
 BookInfo.objecrts.filter(id__lte=3) 
 ```
-5.日期查询:  模块类属性名__条件名=值  
+6.日期查询: 模块类属性名__条件名=值  
 
 - 查询年: 模块类属性名__year=值 year可换为 month day
 
@@ -136,7 +134,7 @@ BookInfo.objecrts.filter(bpub_date__gt=date(1980,1,1))
 ```
 - 查询大于1980.1.1的书籍 要导入date函数  
 
-6.exclude: 返回不满足条件的
+7.exclude: 返回不满足条件的
 
 - 返回id不等于1的
 
@@ -145,7 +143,7 @@ BookInfo.objects.exclude(id=1)
 ```
 
 
-7.order_by  
+8.order_by  
 
 - 升序排列 = 从小到大(可以加多个排序条件): 
 
@@ -169,13 +167,13 @@ BookInfo.objects.order_by('id')
 ##### Q对象: 与或非 & | ~
 作用:查询条件之间的逻辑关系  not and or  
 
-导入包: 
+导入包
 
 ```python
 from djang.db.models import Q  
 ```
 
-1.且关系:   
+1.且关系
 
 - 查id大于3且阅读量大于30   
 
@@ -188,7 +186,7 @@ BookInfo.objects.filter(Q(id__gt=3)&Q(bread__gt=30))
 ```
 两者一样,方法二为简写,优先用上面那个
 
-- 或关系: 
+2.或关系
 
 ```
 BookInfo.objects.filter( Q(id__gt=3) | Q(bread__gt=30) )
@@ -225,7 +223,7 @@ aggregate:调用它使用聚合,返回`字典`
 ```
 from django.db.models import Sum,Count,Max,Min,Avg
 ```
-- 查询用户总数
+1.查询用户总数
 
 
 ```
@@ -236,29 +234,29 @@ BookInfo.objects.all().aggregate(Count('id))
 BookInfo.objects.aggregate(Count('id')) 
 ```
 .all()可以省略  
-
-
 返回值为 {'id_count':5}  为字典
 
-- 总和
-
+2.总和
+- 查询阅读总量
 ``` python
 BookInfo.objects.aggregate(Sum('bread'))
 ```
 Count() count函数返回数字,其余aggregate(例如这里面的Count)返回字典   
 
-- count() 函数使用: 
+3.count() 函数使用
+
+- 直接调用count函数  
+>注意:  
+>count函数返回数值  
+>aggregate(Count(''))返回QuerySet
 
 ``` python
 BookInfo.objects.filter(id__gt=3).count()
 ```
 
-
-
-总结:查询函数
+## 查询函数总结
 
 ![avatar](templates/mdpic/sql.png)
-
 
 
 #  关联属性
