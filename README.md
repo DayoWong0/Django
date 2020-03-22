@@ -63,7 +63,7 @@ order_by:对查询结果排序
 
 ```BookInfo.objecrts.filter(btitle__contain='传') ``` #查询包含 传 的书名
 ```BookInfo.objecrts.filter(btitle__endswith='传') ``` #查询以传结尾的书名
-```BookInfo.objecrts.filter(btitle__startwith='传')  ```#查询以传结尾的书名
+```BookInfo.objecrts.filter(btitle__startwith='传')  ```#查询以传开头的书名
 
 3.空查询  
 ```BookInfo.objecrts.filter(btitle__isnull=False) ``` #查询 不为空 的书名
@@ -83,7 +83,7 @@ lte        小于等于
 
 6.日期查询:  模块类属性名__条件名=值  
 查询年: 模块类属性名__year=值 year可换为 month day
-```BookInfo.objecrts.filter(bpub_date__year=1980) ``` #查询 日期大于1980 的书  
+```BookInfo.objecrts.filter(bpub_date__year=1980) ``` #查询 日期等于1980年的书?  
 ```BookInfo.objecrts.filter(bpub_date__gt=date(1980,1,1)) ``` #查询大于1980.1.1的书籍 要导入date函数  
 
 7.exclude:返回不满足条件的
@@ -159,7 +159,7 @@ count()使用:
 ##关联属性
 1.一对多:在多的那个定义外键  
 2.多对多:哪一个定义都可以  
-3.一对一:哪一个定义都可以
+3.一对一:哪一个定义都可以  
 
 
 
