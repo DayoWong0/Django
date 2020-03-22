@@ -316,7 +316,24 @@ b.hbook返回对象
 
 ### 自关联
 ![自关联](templates/mdpic/ziguanlian.PNG)
+自关联 = 特殊的一对多关系,这些一对多的关系在一张表里面(表四)
 
+
+
+
+
+
+
+
+### 出错排查
+-  TypeError: __init__() missing 1 required positional argument: 'on_delete'  
+描述:执行出错
+```
+python manage.py makemigrations
+```
+外键选项加上:
+on_delete=models.CASCADE  
+[详细解决方法](https://blog.csdn.net/yjk13703623757/article/details/79452968)
 
 
 

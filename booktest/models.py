@@ -55,7 +55,16 @@ class HeroInfo(models.Model):
         # 返回书名
         return self.hname
 
-    """
+
+class AreaInfo(models.Model):
+    """地区模型类"""
+    # 地区名称
+    atitle = models.CharField(max_length=20)
+    #     关系属性,代表当前地区父级地区 自关联
+    aParent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)  # null数据库里可为空, blank管理页面可为空
+
+
+"""
 #   两个表都是空的     
 
 # 对b赋值
@@ -82,7 +91,6 @@ datetime.date(1990, 1, 1)
 >>> h.save()
 
 """
-
 
 """关系操作查询
 
