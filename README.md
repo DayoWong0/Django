@@ -56,7 +56,9 @@ order_by:对查询结果排序
 
 ```BookInfo.objects.get(id__exact=1)  ```
 简写:  
-```BookInfo.objects.get(id=1)```
+```python
+BookInfo.objects.get(id=1)
+```
 
 2.模糊查询  
 包含:contains endswith startwith
