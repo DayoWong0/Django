@@ -88,6 +88,13 @@ print("python")
 apt-get install wget,vim
 ```
 
+这是一个链接 [菜鸟教程](https://www.runoob.com)
+
+###md图片
+
+![RUNOOB](http://static.runoob.com/images/runoob-logo.png "RUNOOB")
+![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png "RUNOOB")
+
 
 
 
