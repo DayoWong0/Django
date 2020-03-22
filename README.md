@@ -259,16 +259,69 @@ BookInfo.objects.filter(id__gt=3).count()
 ![avatar](templates/mdpic/sql.png)
 
 
-#  关联属性
-1.一对多:在多的那个定义外键  
-2.多对多:哪一个定义都可以  
-3.一对一:哪一个定义都可以  
+# 关联属性
+1. 一对多:在多的那个定义外键  
+2. 多对多:哪一边定义都可以  
+3. 一对一:哪一边定义都可以  
+
+我要做的项目是一对一模式还是一对多?
+
+# 11.关联查询(一对多)
+
+- 查询id为1的英雄的信息(class BookInfo 和 class HeroInfo 已经关联属性)
+
+```python
+b = BookInfo.objects.get(id=1)
+b.heroinfo_set.all()
+```
+
+##通过模型类实现关联查询
+- 查询图书信息,要求图书关联的英雄的描述包含'八'  
+前提:(class BookInfo 和 class HeroInfo 已经关联属性)  
+```python
+BookInfo.objects.fliter(heroinfo__hcomment__contains='八') 
+```
+- 查询图书信息,要求图书中的英雄id大于三
+```python
+BookInfo.objects.filter(heroinfo__id__gt=3) (id前面是两个下划线? 是的)
+```
+- 查询书名为天龙八部的所有英雄
+```python
+BookInfo.objects.fllter(hbook__btitle='天龙八部')
+```
+比较第三个和前两个  
+如果前面有对应查询的类名,参数里面直接写属性名(第三个,hbook__btitle='天龙八部').  
+如果没,先要写类名(第一二个,heroinfo__hcomment__contains='八')  
+
+- 查询 id为1的英雄 关联的图书信息  
+```python
+BookInfo.objects.filter(heroinfo__id=1)
+```
+返回QuerySet(查询集) 
+
+第二种方法:  
+```python
+b = HeroInfo.objects.get(id=1)
+b.hbook
+```
+b.hbook返回对象
+
+总结:
+1. 通过模型类实现关联查询时,要查哪个表中的数据,就需要通过哪个类来查
+2. 写关联查询条件时,如果类中没有关系属性,条件要写对应的关系属性,如果有,直接写关系属性
+
+## 插入 更新 删除
+- 调用模型类对象的save() 实现数据表中的插入和更新  
+- 调用----------delete()------------删除  
+
+### 自关联
+![自关联](templates/mdpic/ziguanlian.PNG)
 
 
 
 
 
-
+ 
 
 
 
