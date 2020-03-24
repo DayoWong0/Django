@@ -15,6 +15,26 @@ class BookInfoManage(models.Manager):  # 自定义管理类
         books = books.filter(isDelete=False)
         return books
 
+    # 2.封装函数:操作模型类对应的数据表(增删改查)
+    def create_book(self, btitle, bpub_date):
+        #获取self所在模型类
+        model_class = self.model
+        # creat book对象
+        book = model_class()
+        # book = BookInfo() #这个就不用了
+        book.btitle = btitle
+        book.bpub_date = bpub_date
+        # 保存
+        book.save()
+        # 返回book
+        return book
+
+
+
+
+
+
+
 
 # 返回books
 
@@ -36,6 +56,19 @@ class BookInfo(models.Model):  # 必须继承于model.Model才行
     isDelete = models.BooleanField(default=False)
     # 加这个可以使用BookInfo.object. 不加不行
     objects = BookInfoManage()  # 管理类 自定义
+
+    # 指定数据表表名
+    class Meta:
+        db_table = '表名'
+
+    @classmethod
+    def creat_book(cls,btitle,bpub_date):
+        obj = cls()
+        obj.btitle = btitle
+        obj.bpub_date = bpub_date
+    #     保存
+        obj.save()
+        return obj
 
     def __str__(self):
         # 返回书名

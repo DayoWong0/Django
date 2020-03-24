@@ -321,7 +321,7 @@ b.hbook返回对象
 # 模型管理类自定义
 
 - 用途:  
-1.改变查询结果集  
+1. 改变查询结果集  
 调用此命令,返回没有删除的图书的数据:
  ```python
 BookInfo.objects.all()
@@ -337,6 +337,102 @@ class BookInfoManage(models.Manager):  # 自定义管理类
         books = books.filter(isDelete=False)
         return books
 ```
+2. 添加额外的方法
+
+models.py 中 class BookInfo(models.Model)下,增加一个保存图书的方法
+问:@classmethod什么意思?
+```python
+    @classmethod
+    def creat_book(cls,btitle,bpub_date):
+        obj = cls()
+        obj.btitle = btitle
+        obj.bpub_date = bpub_date
+    #     保存
+        obj.save()
+        return obj
+```
+但是一般定义在模型类里,一般定义在模型类管理器里面
+models.py 中 class BookInfoManage(models.Manager)
+```python
+class BookInfoManage(models.Manager):  # 自定义管理类
+        #     1.改变查询结果集
+    def all(self):
+        #         调用父类all方法 获取所有
+        books = super().all()  # 查询集合
+        #     对数据进行过滤
+        books = books.filter(isDelete=False)
+        return books
+        
+    # 2.封装函数:操作模型类对应的数据表(增删改查)
+    def create_book(self, btitle, bpub_date):
+        # creat book对象
+        book = BookInfo()
+        book.btitle = btitle
+        book.bpub_date = bpub_date
+        # 保存
+        book.save()
+        # 返回book
+        return book
+```
+实际上django已经封装好了这个方法
+调用:(传参必须通过关键字参数传)
+```python
+BookInfo.objects.create(btitle='test3',bpubdate='1990-10-10')
+```
+
+- 为了方便维护代码:
+```python
+    def create_book(self, btitle, bpub_date):
+        #获取self所在模型类
+        model_class = self.model
+        # creat book对象
+        book = model_class()
+        # book = BookInfo() #这个就不用了
+        book.btitle = btitle
+        book.bpub_date = bpub_date
+        # 保存
+        book.save()
+        # 返回book
+        return book
+```
+
+- 元选项
+1. 指定数据表表名
+使用:在类定义中加入
+```python
+    # 指定数据表表名
+    class Meta:
+        db_table = '表名'
+```
+
+表名可改变,其他不能改变
+实例:  
+```python
+class BookInfo(models.Model):  # 必须继承于model.Model才行
+    """图书模型类"""
+    # 图书名称 CharField 说明是字符串 max_length指定字符串最大长度
+    btitle = models.CharField(max_length=20)
+    # 图书出版日期 DateField日期类型
+    bpub_date = models.DateField()
+    # 阅读量
+    bread = models.IntegerField(default=0)
+    # 评论量
+    bcomment = models.IntegerField(default=0)
+    # 删除标记 不做真正的删除 软删除
+    isDelete = models.BooleanField(default=False)
+    # 加这个可以使用BookInfo.object. 不加不行
+    objects = BookInfoManage()  # 管理类 自定义
+
+    # 指定数据表表名
+    class Meta:
+        db_table = '表名'
+```
+
+# 视图
+
+
+
+
 
 
 
