@@ -318,6 +318,17 @@ b.hbook返回对象
 ![自关联](templates/mdpic/ziguanlian.PNG)
 自关联 = 特殊的一对多关系,这些一对多的关系在一张表里面(表四)
 
+# 模型管理类自定义
+
+- 用途:  
+    1.改变查询结果集
+
+
+
+
+
+
+
 
 
 
@@ -341,10 +352,10 @@ on_delete=models.CASCADE
 objects = models.Manager()
 ```
 
-# 模型管理类自定义
+## 用python3编译器出现python2错误
+[解决办法:关闭兼容性检测:Inspections-->python-->Code compatibility Inspection-->取消勾选2,7版本](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000027564-pyCharm-writes-python-version-2-7-doesn-t-have-module-pathlib-while-project-interpreter-is-set-to-3-5-2-mac-os-high-sierra-)
 
-- 用途:  
-    1.改变查询结果集
+
 
 
 

@@ -10,8 +10,7 @@ class BookInfoManage(models.Manager): # 自定义管理类
 #     1.改变查询结果集
 #     def all(self):
 #         调用父类all方法 获取所有
-        super().all()
-
+        books = super().all()
 
 
 # 图书类
