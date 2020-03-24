@@ -6,6 +6,14 @@ from django.db import models
 # Create your models here.
 
 
+class BookInfoManage(models.Manager): # 自定义管理类
+#     1.改变查询结果集
+#     def all(self):
+#         调用父类all方法 获取所有
+        super().all()
+
+
+
 # 图书类
 
 # 一类
@@ -22,7 +30,7 @@ class BookInfo(models.Model):  # 必须继承于model.Model才行
     # 删除标记 不做真正的删除 软删除
     isDelete = models.BooleanField(default=False)
     # 加这个可以使用BookInfo.object. 不加不行
-    objects = models.Manager()
+    objects = BookInfoManage() # 管理类 自定义
 
     def __str__(self):
         # 返回书名
@@ -63,6 +71,9 @@ class AreaInfo(models.Model):
     #     关系属性,代表当前地区父级地区 自关联
     aParent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)  # null数据库里可为空, blank管理页面可为空
     objects = models.Manager()
+
+    def __str__(self):
+        return self.atitle
 
 
 

@@ -85,7 +85,7 @@ def create(request):
     # 重定向 
     # return HttpResponseRedirect('/index')
     # 简单写法
-    return redirect('/index') 
+    return redirect('/index')
 
 
 def delete(request, bid):
@@ -93,7 +93,7 @@ def delete(request, bid):
     # 获取图书id
     book = BookInfo.objects.get(id=bid)
     book.delete()
-    
+
     # 重定向 
     # return HttpResponseRedirect('/index')
     # 简单写法
@@ -102,8 +102,15 @@ def delete(request, bid):
 
 def areas(request):
     """获取广州市的上下级地区"""
-#     获取广州的信息
-    area = AreaInfo.objects.get(atittle='广州市')
-#     查询广州市的上级地区
+    #     获取广州的信息
+    area = AreaInfo.objects.get(atitle='广州市')
 
-
+    #     查询广州市的上级地区,两种方法
+    #     aParent = AreaInfo.objects.get(aParent='广州市')
+    #   第二种方法, 由多查1模型  p25讲解的例子
+    parent = area.aParent
+    #     查询广州市的下级地区
+    children = area.areainfo_set.all()
+    #     模板
+    return render(request, 'booktest/areas.html',
+                  {'area': area, 'parent': parent, 'children': children})

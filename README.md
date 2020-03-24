@@ -341,6 +341,12 @@ on_delete=models.CASCADE
 objects = models.Manager()
 ```
 
+# 模型管理类自定义
+
+- 用途:  
+    1.改变查询结果集
+
+
 
 
 

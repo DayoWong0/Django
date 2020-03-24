@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BookInfo, HeroInfo
+from .models import BookInfo, HeroInfo, AreaInfo
 
 # Register your models here.
 
@@ -26,7 +26,12 @@ class HeroInfoAdmin(admin.ModelAdmin):
     """英雄人物模型管理类"""
     list_display = ['id', 'hname', 'hcomment']
 
+class AreasAdmin(admin.ModelAdmin):
+    """英雄人物模型管理类"""
+    list_display = ['atitle', 'aParent']
+
 
 # 注册模型类
 admin.site.register(BookInfo, BookInfoAdmin)
 admin.site.register(HeroInfo, HeroInfoAdmin)
+admin.site.register(AreaInfo, AreasAdmin)

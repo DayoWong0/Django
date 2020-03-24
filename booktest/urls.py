@@ -21,6 +21,10 @@ urlpatterns = [
     re_path(r'^delete(\d+)$', views.delete),  # 删除图书
 
     # r'^books/(\d+)$ 正则表达式中 (\d+) 表示会传参数给djandog-->此处传的参数为 bid
-    re_path(r'^books/(\d+)$', views.detail)  # 显示英雄信息
+    re_path(r'^books/(\d+)$', views.detail),  # 显示英雄信息
+
+    re_path(r'^areas/$', views.areas)  # 自关联案例
 
 ]
+
+
