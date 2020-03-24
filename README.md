@@ -321,9 +321,22 @@ b.hbook返回对象
 # 模型管理类自定义
 
 - 用途:  
-    1.改变查询结果集
-
-
+1.改变查询结果集  
+调用此命令,返回没有删除的图书的数据:
+ ```python
+BookInfo.objects.all()
+```
+位于models.py下
+```python
+class BookInfoManage(models.Manager):  # 自定义管理类
+        #     1.改变查询结果集
+    def all(self):
+        #         调用父类all方法 获取所有
+        books = super().all()  # 查询集合
+        #     对数据进行过滤
+        books = books.filter(isDelete=False)
+        return books
+```
 
 
 

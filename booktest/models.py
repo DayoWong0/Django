@@ -6,11 +6,17 @@ from django.db import models
 # Create your models here.
 
 
-class BookInfoManage(models.Manager): # 自定义管理类
-#     1.改变查询结果集
-#     def all(self):
-#         调用父类all方法 获取所有
-        books = super().all()
+class BookInfoManage(models.Manager):  # 自定义管理类
+        #     1.改变查询结果集
+    def all(self):
+        #         调用父类all方法 获取所有
+        books = super().all()  # 查询集合
+        #     对数据进行过滤
+        books = books.filter(isDelete=False)
+        return books
+
+
+# 返回books
 
 
 # 图书类
@@ -29,7 +35,7 @@ class BookInfo(models.Model):  # 必须继承于model.Model才行
     # 删除标记 不做真正的删除 软删除
     isDelete = models.BooleanField(default=False)
     # 加这个可以使用BookInfo.object. 不加不行
-    objects = BookInfoManage() # 管理类 自定义
+    objects = BookInfoManage()  # 管理类 自定义
 
     def __str__(self):
         # 返回书名
@@ -73,7 +79,6 @@ class AreaInfo(models.Model):
 
     def __str__(self):
         return self.atitle
-
 
 
 """
