@@ -123,6 +123,12 @@ def indexView(request):
 
 def login(request):
     """显示登录页面"""
+    # 判断用户是否登录
+    if request.session.has_key('islogin'):
+        # 用户已登录
+        return redirect('/index666')
+
+
     # 获取cookie username
     if 'username' in request.COOKIES:
         # 获取用户名
@@ -153,7 +159,13 @@ def login_check(request):
         if remember == 'on':
             # 过期时间 一周
             response.set_cookie('username',username,max_age=7*24*3600)
+        
+        # 记住用户登录状态
+        # session 有islogin就认为用户已经登录
+        request.session['islogin'] = True
+
         return response
+
 
 
     else:
@@ -217,9 +229,9 @@ def set_session(request):
     # 设置session
     request.session['username'] = 'smart'
     request.session['age'] = 18
-    request.session.set_expiry(10)
+    request.session.set_expiry(600)
 
-    return HttpResponse('设置session,过期时间10秒')
+    return HttpResponse('设置session,过期时间600秒')
 
 def get_session(request):
     # 设置session
