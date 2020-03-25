@@ -177,4 +177,20 @@ def login_ajax_check(request):
     else:
         # return redirect('/login')
         return JsonResponse({'res':0})
+# /set_cookie
+def set_cookie(request):
+    '设置cookie信息'
+    response = HttpResponse('设置cookie')
+    # 设置一个cookie信息 名字为mum 值为1
+    response.set_cookie('num',6)
+    return response
+
+# /get_cookie
+def get_cookie(request):
+    '获取cookie'
+    # 取出cookie num的值
+    num = request.COOKIES['num']
+    return HttpResponse(num)
+
+
 

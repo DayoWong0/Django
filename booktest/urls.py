@@ -34,6 +34,10 @@ urlpatterns = [
     re_path(r'^login_ajax$', views.login_ajax),  # 建立index和视图的关系
     re_path(r'^login_ajax_check$', views.login_ajax_check),  # ajax登录校验
 
+    re_path(r'^get_cookie/$', views.get_cookie),  # 获取cookie
+    re_path(r'^set_cookie/$', views.set_cookie),  # 设置cookie
+
+
 
     
 

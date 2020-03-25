@@ -4,7 +4,7 @@ Django学习
 
 [视频地址](https://www.bilibili.com/video/BV1Tx411d7E7/?p=29&t=285)
 
-## Test  
+## md使用 
 Markdown  
 
     注意点1:  
@@ -21,7 +21,7 @@ Markdown
     一头一尾
 
 
-# 新建项目并配置
+## 新建项目并配置
 [新建项目配置视频](https://www.bilibili.com/video/BV1Tx411d7E7/?p=29&t=285)
 # 数据库
 
@@ -264,14 +264,14 @@ BookInfo.objects.filter(id__gt=3).count()
 ![avatar](templates/mdpic/sql.png)
 
 
-# 关联属性
+## 关联属性
 1. 一对多:在多的那个定义外键  
 2. 多对多:哪一边定义都可以  
 3. 一对一:哪一边定义都可以  
 
 我要做的项目是一对一模式还是一对多?
 
-# 11.关联查询(一对多)
+## 11.关联查询(一对多)
 
 - 查询id为1的英雄的信息(class BookInfo 和 class HeroInfo 已经关联属性)
 
@@ -323,7 +323,7 @@ b.hbook返回对象
 ![自关联](templates/mdpic/ziguanlian.PNG)
 自关联 = 特殊的一对多关系,这些一对多的关系在一张表里面(表四)
 
-# 模型管理类自定义
+## 模型管理类自定义
 
 - 用途:  
 1. 改变查询结果集  
@@ -470,19 +470,22 @@ q1.get('a)
 ```
 
 获取a对应的列表
-```python
+``` python
 q1.getlist('a')
 ```
 
 - request的方法:  
 GET POST PATH 
 
-- ajax:异步JavaScript
+## ajax:异步JavaScript
 
 ![ajax](templates/mdpic/ajax.PNG)
 
+1. ajax不要返回页面或者重定向,因ajax始终在后台
 
-
+## Cookie
+描述: 服务器生成并存储,浏览器也存储cookie,服务器请求网站带上cookie信息,就免登录了
+![cookie](templates/mdpic/cookie.PNG)
 
 
 
@@ -502,7 +505,7 @@ GET POST PATH
 
 
 # 出错解决记录
--  TypeError: __init__() missing 1 required positional argument: 'on_delete'  
+##  TypeError: __init__() missing 1 required positional argument: 'on_delete'  
 描述:执行出错
 ```python
 python manage.py makemigrations
@@ -511,7 +514,7 @@ python manage.py makemigrations
 on_delete=models.CASCADE  
 [详细解决方法](https://blog.csdn.net/yjk13703623757/article/details/79452968)
 
-- objects选项没提示
+## objects选项没提示
 解决: 在models.py类文件中加入
 ```python
 objects = models.Manager()
