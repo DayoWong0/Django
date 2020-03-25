@@ -37,6 +37,8 @@ urlpatterns = [
     re_path(r'^get_cookie/$', views.get_cookie),  # 获取cookie
     re_path(r'^set_cookie/$', views.set_cookie),  # 设置cookie
 
+    re_path(r'^set_session/$', views.set_session),  # 设置session
+    re_path(r'^get_session/$', views.get_session),  # 获取session
 
 
     

@@ -123,7 +123,15 @@ def indexView(request):
 
 def login(request):
     """显示登录页面"""
-    return render(request, 'booktest/login.html')
+    # 获取cookie username
+    if 'username' in request.COOKIES:
+        # 获取用户名
+        username = request.COOKIES['username']
+    else:
+        username = ''
+
+
+    return render(request, 'booktest/login.html', {'username':username})
 
 
 def login_check(request):
@@ -133,13 +141,21 @@ def login_check(request):
     '''1.获取账号密码'''
     username = request.POST.get('username')
     password = request.POST.get('password')
-    # print(username,password)
+    remember = request.POST.get('remember')
+
+    # print(username,password,remenmber)
     '''2.验证密码是否正确'''
     # 用户名,密码:zx zx 正确跳转 不正确继续登录
     if username == 'zx' and password == 'zx':
         # 正确跳转
-        # return redirect('/index666')
-        return HttpResponse('登录成功')
+        response = redirect('/index666')
+        # 判断是否需要记住用户名
+        if remember == 'on':
+            # 过期时间 一周
+            response.set_cookie('username',username,max_age=7*24*3600)
+        return response
+
+
     else:
         # return redirect('/login')
         return HttpResponse('登录失败')
@@ -182,7 +198,11 @@ def set_cookie(request):
     '设置cookie信息'
     response = HttpResponse('设置cookie')
     # 设置一个cookie信息 名字为mum 值为1
-    response.set_cookie('num',6)
+
+    # maxage 多少秒后到期,expires 具体时间到期
+    response.set_cookie('num',6, max_age=14*24*3600)
+    # response.set_cookie('num',6, expires=)
+
     return response
 
 # /get_cookie
@@ -191,6 +211,29 @@ def get_cookie(request):
     # 取出cookie num的值
     num = request.COOKIES['num']
     return HttpResponse(num)
+
+
+def set_session(request):
+    # 设置session
+    request.session['username'] = 'smart'
+    request.session['age'] = 18
+
+    return HttpResponse('设置session')
+
+def get_session(request):
+    # 设置session
+    username = request.session['username']
+    age = request.session['age']
+
+    # HttpResponse()里面的参数拼接 需要用加号
+    return HttpResponse('获取session:'+username+':'+str(age))
+
+
+
+
+
+
+
 
 
 

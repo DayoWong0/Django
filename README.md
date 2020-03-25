@@ -487,6 +487,19 @@ GET POST PATH
 描述: 服务器生成并存储,浏览器也存储cookie,服务器请求网站带上cookie信息,就免登录了
 ![cookie](templates/mdpic/cookie.PNG)
 
+## Session
+ 
+- 设置session:
+```python
+request.session['username']='zx'
+```
+
+- 读取session
+```python
+request.session['username']
+```
+
+
 
 
 
@@ -522,6 +535,19 @@ objects = models.Manager()
 
 ## 用的python3,编译器提示python2错误
 [解决办法:关闭兼容性检测:Inspections-->python-->Code compatibility Inspection-->取消勾选2,7版本](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000027564-pyCharm-writes-python-version-2-7-doesn-t-have-module-pathlib-while-project-interpreter-is-set-to-3-5-2-mac-os-high-sierra-)
+
+## # HttpResponse()里面的参数拼接需要用加号,不能用逗号
+- 正确写法
+```python
+return HttpResponse('获取session:'+username+':'+str(age))
+
+```
+
+- 错误写法
+```python
+return HttpResponse('获取session:',username,':',str(age))
+```
+
 
 
 
