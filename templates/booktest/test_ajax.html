@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script>
+        $(function() {
+        //绑定btnAjax click事件
+            $('#btnAjax').click(function() {
+                $.ajax({
+                    'url': '/ajax_handle',
+                    'dataType': 'json'
+                    }).success(function(data){
+                    //处理
+<!--                    alert(data.res)-->
+                    if (data.res == 1){
+                        $('#message').show().html('提示信息')
+
+                    }
+
+
+
+
+            })
+        })
+    })
+
+    </script>
+
+    <style>
+        #message{
+            display: none;
+            color:red;
+        }
+
+    </style>
+
+</head>
+<body>
+<input type="button" id="btnAjax" value="ajax请求">
+<div id="message"></div>
+
+</body>
+</html>

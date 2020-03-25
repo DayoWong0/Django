@@ -1,6 +1,6 @@
 from datetime import date
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from booktest.models import BookInfo, AreaInfo  # 导入图书模型类
 from django.template import loader, RequestContext
@@ -114,3 +114,67 @@ def areas(request):
     #     模板
     return render(request, 'booktest/areas.html',
                   {'area': area, 'parent': parent, 'children': children})
+
+
+def indexView(request):
+    """首页"""
+    return render(request, 'booktest/indexView.html')
+
+
+def login(request):
+    """显示登录页面"""
+    return render(request, 'booktest/login.html')
+
+
+def login_check(request):
+    """ request.POST,GET 分别保存对应方法提交的参数"""
+
+    """登录验证"""
+    '''1.获取账号密码'''
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    # print(username,password)
+    '''2.验证密码是否正确'''
+    # 用户名,密码:zx zx 正确跳转 不正确继续登录
+    if username == 'zx' and password == 'zx':
+        # 正确跳转
+        # return redirect('/index666')
+        return HttpResponse('登录成功')
+    else:
+        # return redirect('/login')
+        return HttpResponse('登录失败')
+
+
+def ajax_test(request):
+    return render(request, 'booktest/test_ajax.html')
+
+
+def ajax_handle(request):
+    """ajax请求处理"""
+
+    return JsonResponse({'res': '1'})
+
+def login_ajax(request):
+    return render(request, 'booktest/login_ajax.html')
+
+   # /login_ajax_check
+def login_ajax_check(request):
+    """ajax登录校验"""
+
+    """ request.POST,GET 分别保存对应方法提交的参数"""
+
+    """登录验证"""
+    '''1.获取账号密码'''
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    # print(username,password)
+    '''2.验证密码是否正确'''
+    # 用户名,密码:zx zx 正确跳转 不正确继续登录
+    if username == 'zx' and password == 'zx':
+        # 正确,返回json数据
+        # return redirect('/index666')
+        return JsonResponse({'res':1})
+    else:
+        # return redirect('/login')
+        return JsonResponse({'res':0})
+

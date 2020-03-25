@@ -24,6 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'nj!3q7ei**l&fg!(lr9cvu)15yv*(h@9dvxaat+fwhi-^++_9%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
+#
+# ALLOWED_HOSTS = ['*']
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -44,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -128,3 +132,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# 设置静态文件的保存目录
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]

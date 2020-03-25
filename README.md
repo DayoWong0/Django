@@ -2,6 +2,8 @@
 
 Django学习
 
+[视频地址](https://www.bilibili.com/video/BV1Tx411d7E7/?p=29&t=285)
+
 ## Test  
 Markdown  
 
@@ -18,6 +20,9 @@ Markdown
     html中 地址开头统一用 '/create'这样的就行了
     一头一尾
 
+
+# 新建项目并配置
+[新建项目配置视频](https://www.bilibili.com/video/BV1Tx411d7E7/?p=29&t=285)
 # 数据库
 
 django选项(models.py 导入的models包内)  
@@ -430,6 +435,51 @@ class BookInfo(models.Model):  # 必须继承于model.Model才行
 
 # 视图
 
+## 错误:
+- 404排错:url未配置或者配置错误
+- 500排错:视图出错  
+
+##  捕获url参数(视频p31)
+概述:进行url匹配时,把需要捕获的部分设置橙一个`正则表达式组`,
+django会把匹配到的内容作为参数传递给视图函数
+- 位置参数:参数名可以任意指定
+
+- 关键字参数:在位置参数的基础上给正则表达式组命名即可  
+    ?p<组名>
+    关键字参数,视图中参数名必须和正则表达式组名一致
+    
+    
+- QueryDict
+取值方法:  
+1.q['a'] --字典法
+2.q.get('a')
+个人觉得2方法简单点,而且get方法取如果  
+没有这个值会返回none,而第一种会报错
+
+方法2:可以设置默认值 q.get('d', 'default'')  
+如果d无值,则使用我自己设定的default默认值  
+
+QueryDict可以存多个参数
+
+```python
+q1 = QueryDict('a=1&a=2&b=2')
+```
+获取最后一个a的值
+```python
+q1.get('a)
+```
+
+获取a对应的列表
+```python
+q1.getlist('a')
+```
+
+- request的方法:  
+GET POST PATH 
+
+- ajax:异步JavaScript
+
+![ajax](templates/mdpic/ajax.PNG)
 
 
 
@@ -445,7 +495,13 @@ class BookInfo(models.Model):  # 必须继承于model.Model才行
 
 
 
-### 出错排查
+
+
+
+
+
+
+# 出错解决记录
 -  TypeError: __init__() missing 1 required positional argument: 'on_delete'  
 描述:执行出错
 ```python
@@ -461,7 +517,7 @@ on_delete=models.CASCADE
 objects = models.Manager()
 ```
 
-## 用python3编译器出现python2错误
+## 用的python3,编译器提示python2错误
 [解决办法:关闭兼容性检测:Inspections-->python-->Code compatibility Inspection-->取消勾选2,7版本](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000027564-pyCharm-writes-python-version-2-7-doesn-t-have-module-pathlib-while-project-interpreter-is-set-to-3-5-2-mac-os-high-sierra-)
 
 

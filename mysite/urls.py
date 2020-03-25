@@ -22,7 +22,7 @@ from booktest import urls, views
 
 urlpatterns = [
     # path('polls/', include('polls.urls')),
-    path('002d4248-7dd7-4b24-ac0c-46df0dde9ee2/', admin.site.urls),  # 配置项目
+    path('admin/', admin.site.urls),  # 配置项目
     # path('index/', include('booktest.urls'))
 
     # 正则表达式匹配

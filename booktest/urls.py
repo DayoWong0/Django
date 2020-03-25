@@ -23,7 +23,19 @@ urlpatterns = [
     # r'^books/(\d+)$ 正则表达式中 (\d+) 表示会传参数给djandog-->此处传的参数为 bid
     re_path(r'^books/(\d+)$', views.detail),  # 显示英雄信息
 
-    re_path(r'^areas/$', views.areas)  # 自关联案例
+    re_path(r'^areas/$', views.areas),  # 自关联案例
+
+    re_path(r'^indexView/$', views.indexView),  # 建立index和视图的关系
+    re_path(r'^login/$', views.login),  # 建立index和视图的关系
+    re_path(r'^login_check$', views.login_check),  # 建立index和视图的关系
+
+    re_path(r'^test_ajax$', views.ajax_test),  # 建立index和视图的关系
+    re_path(r'^ajax_handle$', views.ajax_handle),  # 建立index和视图的关系
+    re_path(r'^login_ajax$', views.login_ajax),  # 建立index和视图的关系
+    re_path(r'^login_ajax_check$', views.login_ajax_check),  # ajax登录校验
+
+
+    
 
 ]
 
