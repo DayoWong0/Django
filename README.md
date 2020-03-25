@@ -499,6 +499,30 @@ request.session['username']='zx'
 request.session['username']
 ```
 
+### session方法
+```python
+request.session.clear()
+```
+
+```python
+request.session.flush()
+```
+```python
+del request.session['键']
+```
+
+设置session_id cookie过期时间  
+- value = 整数: 在value秒后没有活动会过期
+- value = 0  : 浏览器关闭时过期
+- value = None : 两周后过期
+```python
+request.session.set_expiry(value)
+```
+
+
+
+
+
 
 
 

@@ -217,8 +217,9 @@ def set_session(request):
     # 设置session
     request.session['username'] = 'smart'
     request.session['age'] = 18
+    request.session.set_expiry(10)
 
-    return HttpResponse('设置session')
+    return HttpResponse('设置session,过期时间10秒')
 
 def get_session(request):
     # 设置session
@@ -227,6 +228,11 @@ def get_session(request):
 
     # HttpResponse()里面的参数拼接 需要用加号
     return HttpResponse('获取session:'+username+':'+str(age))
+
+def clear_session(request):
+    "清除session 删除值的部分"
+    request.session.clear()
+    return HttpResponse('清除成功')
 
 
 
