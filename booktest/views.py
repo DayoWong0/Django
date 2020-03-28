@@ -246,6 +246,10 @@ def clear_session(request):
     request.session.clear()
     return HttpResponse('清除成功')
 
+# /temp_inherit
+def temp_inherit(request):
+    "模板继承"
+    return render(request,'booktest/child.html')
 
 
 

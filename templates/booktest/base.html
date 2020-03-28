@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>bloc父模板文件</title>
+    {% endblock title %}
+</head>
+<body>
+    <h1>导航条</h1>
+    {% block b1 %}
+      <h1>父模板b1</h1>
+    {% endblock b1 %}
+
+    {% block b2 %}
+    <h1>父模板b2</h1>
+  {% endblock b2 %}
+
+  
+
+    <h1>版权信息</h1>
+</body>
+</html>

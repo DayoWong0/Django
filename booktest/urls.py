@@ -40,6 +40,8 @@ urlpatterns = [
     re_path(r'^set_session/$', views.set_session),  # 设置session
     re_path(r'^get_session/$', views.get_session),  # 获取session
     re_path(r'^clear_session/$', views.clear_session),  # 清除session
+    re_path(r'^temp_inherit/$', views.temp_inherit),  # 模板继承
+    
 
 
     

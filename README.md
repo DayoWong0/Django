@@ -551,6 +551,44 @@ for语句
 
 - 逻辑运算:not and or
 
+## 过滤器
+作用:按照自己想要的格式取显示或者统计信息等
+- data:改变日期显示格式
+- length:求长度.字符串,列表,元组,字典长度
+- default:设置模板变量默认值
+
+参考资料:https://www.liujiangblog.com/course/django/147
+
+### 自定义过滤器
+参数个数1或者2
+
+## 模板注释
+
+- 单行注释: 
+```python
+{# 注释 #}
+```
+- 多行注释: 
+```python
+{% comment %}
+注释内容
+{% endcomment %}
+```
+
+## 模板继承
+
+![extend1](templates/mdpic/templatesExtends.PNG)
+- 获取付模板中的内容
+```python
+{{block.super}}
+```
+
+## html转义
+
+
+
+
+
 
 
 

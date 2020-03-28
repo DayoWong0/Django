@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{% load filters %}
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,9 +12,12 @@
 
 <ul>
     {%for book in books %}
+        {% if book.id|mod %}{% endif %}
+
         <li><a href="/books/{{book.id}}">{{book.btitle}} </a> </li>
     {% endfor %}
 </ul>
+
 
 </body>
 </html>
