@@ -613,6 +613,7 @@ for语句
 [装饰器--菜鸟教程](https://www.runoob.com/w3cnote/python-func-decorators.html)  
 [关键字参数**kwargs和*args](https://blog.csdn.net/u014745194/article/details/70158926)
 
+<a href="https://blog.csdn.net/u014745194/article/details/70158926" target="_blank">关键字参数**kwargs和*args</a>
 ### 登录装饰器
 - 装饰器函数
 ```python
