@@ -519,6 +519,46 @@ del request.session['键']
 request.session.set_expiry(value)
 ```
 
+## 模板变量
+
+![templates](templates/mdpic/mobanbianliang.PNG)
+
+## 模板标签  
+
+- for语句
+```python
+for语句
+{% for x in 列表 %}
+    语句
+{% endfor %}
+```
+
+- 得到for循环遍历到第几次
+```python
+{{ forloop.counter }}
+```
+
+- 逻辑判断
+
+    {% if 条件 %}
+    {% elif 条件 %}
+    {% else 条件 %}
+    {% endif %}
+
+***
+- 关系比较符: = < > <= !=
+注意: 进行比较操作时,比较操作符两边必须有空格
+
+- 逻辑运算:not and or
+
+
+
+
+
+
+
+    
+
 
 
 
