@@ -53,8 +53,18 @@ def login_require(view_func):
 
     return wrapper
 
+EXCLUDE_IPS = ['192.0.0.1']
+def block_ips(view_func):
+    def wrapper(request, *view_args, **view_kwargs):
+        user_ip = request.META['REMOTE_ADDR']
+        if user_ip in EXCLUDE_IPS:
+            return HttpResponse('你不配访问本网站') 
+        else:
+            return view_func(request, *view_args, **view_kwargs)
+    return wrapper
 
 # 传值给网页
+@block_ips
 def index666(request):
     con = {'content': 'Mike', 'list': list(range(1, 10))}
     return render(request, 'booktest/index666.html', con)
@@ -140,11 +150,11 @@ def indexView(request):
 
 
 def login(request):
-    """显示登录页面"""
+    # """显示登录页面"""
     # 判断用户是否登录
     if request.session.has_key('islogin'):
         # 用户已登录
-        return redirect('/index666')
+        return HttpResponse('已登录')
 
 
     # 获取cookie username
@@ -172,7 +182,7 @@ def login_check(request):
     # 用户名,密码:zx zx 正确跳转 不正确继续登录
     if username == 'zx' and password == 'zx':
         # 正确跳转
-        response = redirect('/index666')
+        response = redirect('/index')
         # 判断是否需要记住用户名
         if remember == 'on':
             # 过期时间 一周
@@ -264,6 +274,7 @@ def clear_session(request):
     request.session.clear()
     return HttpResponse('清除成功')
 
+
 # /temp_inherit
 def temp_inherit(request):
     "模板继承"
@@ -273,10 +284,15 @@ def html_escape(request):
     # html转义
     return render(request,'booktest/html_escape.html',{  'content':'<h1>hello</h1>'} )
 
-
-@login_require
+@block_ips
+@login_require 
 def change_pwd(request):
     return render(request, 'booktest/change_pwd.html')
+
+@block_ips
+def get_ipaddr(request):
+    user_ip = request.META['REMOTE_ADDR']
+    return render(request, 'booktest/get_ipaddr.html', {'user_ip':user_ip})
 
 
 

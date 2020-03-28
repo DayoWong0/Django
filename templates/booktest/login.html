@@ -8,6 +8,7 @@
 POST:提交的参数在请求头里,重要数据用POST,数据性安全高时使用<br>
 GET:提交的参数在url中
 <form method="post" action="/login_check">
+    {% csrf_token %}
     用户名:<input type="text" name="username" value="{{username}}"><br>
     密码:<input type="password" name="password"><br>
     <input type="checkbox" name="remember" >记住用户名<br>

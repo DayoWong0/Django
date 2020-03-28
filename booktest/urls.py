@@ -45,6 +45,7 @@ urlpatterns = [
 
     re_path(r'^change_pwd/$', views.change_pwd),  # 登录装饰器
     
+    re_path(r'^get_ipaddr/$', views.get_ipaddr)
 
 
     

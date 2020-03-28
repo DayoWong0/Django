@@ -634,7 +634,63 @@ def login_require(view_func):
 
 ```
 
-## csrf攻击
+## csrf攻击防止
+post请求中的,加入:
+```python
+{% csrf_token %}
+```
+
+```python
+<form method="post" action="/login_check">
+
+{% csrf_token %}
+
+用户名:<input type="text" name="username" value="{{username}}"><br>
+密码:<input type="password" name="password"><br>
+<input type="checkbox" name="remember" >记住用户名<br>
+<input type="submit" value="登录">
+```
+
+## 验证码
+需要安装pillow
+
+## url反向解析
+- 作用:动态生成对应地址
+- 使用:
+1.
+
+## 静态文件配置
+
+## 中间件
+### 获取IP地址 
+```python
+user_ip = request.META['REMOTE_ADDR']
+```
+### ban ip
+
+#### 装饰器
+```python
+EXCLUDE_IPS = ['127.0.0.1']
+def block_ips(view_func):
+    def wrapper(request, *view_args,**view_kwargs):
+        user_ip = request.META['REMOTE_ADDR']
+        if user_ip in EXCLUDE_IPS:
+            return HttpResponse('你不配访问本网站') 
+        else:
+            return view_func(request, *view_args, **view_kwargs)
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

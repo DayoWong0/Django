@@ -57,9 +57,9 @@ class BookInfo(models.Model):  # 必须继承于model.Model才行
     # 加这个可以使用BookInfo.object. 不加不行
     objects = BookInfoManage()  # 管理类 自定义
 
-    # 指定数据表表名
-    class Meta:
-        db_table = '表名'
+    # # 指定数据表表名
+    # class Meta:
+    #     db_table = '表名'
 
     @classmethod
     def creat_book(cls,btitle,bpub_date):
