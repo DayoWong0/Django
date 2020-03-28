@@ -578,12 +578,64 @@ for语句
 ## 模板继承
 
 ![extend1](templates/mdpic/templatesExtends.PNG)
-- 获取付模板中的内容
+- 获取父板中的内容
 ```python
 {{block.super}}
 ```
 
 ## html转义
+- 关闭html转义:
+1. 使用safe过滤器  
+```python
+{{content|safe}}
+```
+2.标签:  
+    autoescape标签关闭转义(off关闭转义,on打开):<br>
+    {% autoescape off %}
+        {{content}}<br>
+    {% endautoescape %}
+
+第一种只针对一个变量,第二个针对多个变量
+
+- 模板硬编码:模板中写死了的文本,不是变量,不能改变的
+模板硬编码的默认不转义
+
+```python
+{{test|default:'<h1>模板硬编码默认不转义</h1>'}}<br>
+```
+
+```python
+手动转义:<br>
+{{test|default:'&lt;h1&gt;模板硬编码默认不转义&lt/h1&gt'}}<br>
+```
+## 装饰器
+在不改变原来的函数下,增加新的功能,且装饰器可以被多个函数使用  
+[装饰器--菜鸟教程](https://www.runoob.com/w3cnote/python-func-decorators.html)  
+[关键字参数**kwargs和*args](https://blog.csdn.net/u014745194/article/details/70158926)
+
+### 登录装饰器
+- 装饰器函数
+```python
+def login_require(view_func):
+    '登录判断装饰器'
+    def wrapper(request, *view_args, **view_kwargs):
+        #判断用户是否登录
+        if request.session.has_key('islogin'):
+            # 用户已登录
+            view_func(request, *view_args, **view_kwargs)
+        else:
+            # 未登录
+            return redirect('/login')
+
+    return wrapper
+```
+
+```python
+
+
+```
+
+## csrf攻击
 
 
 

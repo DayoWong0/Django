@@ -41,6 +41,9 @@ urlpatterns = [
     re_path(r'^get_session/$', views.get_session),  # 获取session
     re_path(r'^clear_session/$', views.clear_session),  # 清除session
     re_path(r'^temp_inherit/$', views.temp_inherit),  # 模板继承
+    re_path(r'^html_escape/$', views.html_escape),  # 模板继承
+
+    re_path(r'^change_pwd/$', views.change_pwd),  # 登录装饰器
     
 
 

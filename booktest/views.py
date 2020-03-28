@@ -36,6 +36,24 @@ from booktest.models import BookInfo
 #     # 4.返回浏览器
 #     return HttpResponse(res_html)
 
+
+def login_require(view_func):
+    '登录判断装饰器'
+    def wrapper(request, *view_args, **view_kwargs):
+        #判断用户是否登录
+        if request.session.has_key('islogin'):
+            # 用户已登录
+            return view_func(request, *view_args, **view_kwargs)
+
+        else:
+            # 未登录
+            # return redirect('/login')
+            return HttpResponse('用户未登录,先登录再进行下一步操作')
+            
+
+    return wrapper
+
+
 # 传值给网页
 def index666(request):
     con = {'content': 'Mike', 'list': list(range(1, 10))}
@@ -251,7 +269,14 @@ def temp_inherit(request):
     "模板继承"
     return render(request,'booktest/child.html')
 
+def html_escape(request):
+    # html转义
+    return render(request,'booktest/html_escape.html',{  'content':'<h1>hello</h1>'} )
 
+
+@login_require
+def change_pwd(request):
+    return render(request, 'booktest/change_pwd.html')
 
 
 

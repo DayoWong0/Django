@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    safe过滤器关闭转义:<br>
+    {{content|safe}}<br>
+
+    autoescape标签关闭转义(off关闭转义,on打开):<br>
+    {% autoescape off %}
+        {{content}}<br>
+        {{content}}<br>
+    {% endautoescape %}
+
+    {{test|default:'<h1>模板硬编码默认不转义</h1>'}}<br>
+
+    手动转义:<br>
+    {{test|default:'&lt;h1&gt;模板硬编码默认不转义&lt/h1&gt'}}<br>
+
+
+</body>
+</html>
