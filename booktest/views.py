@@ -53,7 +53,7 @@ def login_require(view_func):
 
     return wrapper
 
-EXCLUDE_IPS = ['192.0.0.1']
+# 禁止ip修饰器
 def block_ips(view_func):
     def wrapper(request, *view_args, **view_kwargs):
         user_ip = request.META['REMOTE_ADDR']
@@ -61,10 +61,10 @@ def block_ips(view_func):
             return HttpResponse('你不配访问本网站') 
         else:
             return view_func(request, *view_args, **view_kwargs)
-    return wrapper
+    return wrapper #多次忘记输入return wrapper
 
 # 传值给网页
-@block_ips
+
 def index666(request):
     con = {'content': 'Mike', 'list': list(range(1, 10))}
     return render(request, 'booktest/index666.html', con)
@@ -97,8 +97,11 @@ def index(request):
     # 1.查询信息
     books = BookInfo.objects.all()
     # 2.使用模板
+    print('---index--')
+    # num = 'a' + 1
     return render(request, 'booktest/index.html',
                   {'books': books})
+
 
 
 def create(request):
@@ -284,12 +287,11 @@ def html_escape(request):
     # html转义
     return render(request,'booktest/html_escape.html',{  'content':'<h1>hello</h1>'} )
 
-@block_ips
+
 @login_require 
 def change_pwd(request):
     return render(request, 'booktest/change_pwd.html')
 
-@block_ips
 def get_ipaddr(request):
     user_ip = request.META['REMOTE_ADDR']
     return render(request, 'booktest/get_ipaddr.html', {'user_ip':user_ip})

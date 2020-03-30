@@ -19,7 +19,24 @@ python manage.py changepassword username
 # 自定义模型管理类
 class BookInfoAdmin(admin.ModelAdmin):
     """图书模型管理类"""
-    list_display = ['id', 'btitle', 'bpub_date']
+    list_display = ['id', 'btitle', 'bpub_date','title']
+    list_per_page = 10 #每页显示10条数据
+    actions_on_bottom = True
+    # actions_on_top = False
+    list_filter = ['bpub_date'] #界面右侧过滤栏
+    search_fields = ['btitle'] #以bittle搜索框
+
+    # fields = ['bpub_date','btitle']
+    fieldsets = (
+        ('基本', {'fields':['btitle']}),
+        ('高级', {'fields':['bpub_date']})
+    )
+
+
+
+
+
+
 
 
 class HeroInfoAdmin(admin.ModelAdmin):

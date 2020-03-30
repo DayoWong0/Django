@@ -670,15 +670,135 @@ user_ip = request.META['REMOTE_ADDR']
 
 #### 装饰器
 ```python
-EXCLUDE_IPS = ['127.0.0.1']
+EXCLUDE_IPS = ['192.0.0.1'] # 禁止ip列表
+# 禁止ip修饰器
 def block_ips(view_func):
-    def wrapper(request, *view_args,**view_kwargs):
+    def wrapper(request, *view_args, **view_kwargs):
         user_ip = request.META['REMOTE_ADDR']
         if user_ip in EXCLUDE_IPS:
             return HttpResponse('你不配访问本网站') 
         else:
             return view_func(request, *view_args, **view_kwargs)
+    return wrapper #多次忘记输入return wrapper
 ```
+#### 使用:视图函数前 @block_ips 即可
+若全站屏蔽ip:用上面的方法需要对全部视图函数前 @block_ips
+可以使用中间件 简化
+## 中间件
+此函数会在视图函数调用前执行
+
+- 中间件:视图函数
+```python
+class BlockedIPSMiddleware(object):
+    EXCLUDE_IPS = ['127.0.0.1'] # 禁止ip列表
+    def process_view(self,request, view_func, *view_args, **view__kwargs):
+            user_ip = request.META['REMOTE_ADDR']
+            if user_ip in self.EXCLUDE_IPS:
+                return HttpResponse('你不配访问本网站') 
+            # else:
+            #     return view_func(request, *view_args, **view_kwargs)
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+            return self.get_response(request)
+```
+还需要到setting.py里面注册
+由于django版本变化:
+```python
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+            return self.get_response(request)
+```
+以上代码需要加在中间类定义的类里面
+
+### 异常中间件
+
+```python
+class ExceptionTest1Middleware(object):
+    def process_exception(self, request, exception):
+        "view异常时调用"
+        print('--process_exception1')
+        print(exception)
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+            return self.get_response(request)
+
+class ExceptionTest2Middleware(object):
+    def process_exception(self, request, exception):
+        "view异常时调用"
+        print('--process_exception2')
+        print(exception)
+
+
+    def __init__(self, get_response):
+       self.get_response = get_response
+
+    def __call__(self, request):
+            return self.get_response(request)
+```
+异常中间件调用顺序与注册顺序相反
+
+## 后台管理
+
+### 自定义模型管理类
+更多方法谷歌,参考官方文档,可自定义方法,实现自己的功能
+
+admin.py中:  
+```python
+# 自定义模型管理类
+class BookInfoAdmin(admin.ModelAdmin):
+    """图书模型管理类"""
+    list_display = ['id', 'btitle', 'bpub_date','title']
+    list_per_page = 10 #每页显示10条数据
+    actions_on_bottom = True
+    # actions_on_top = False
+    list_filter = ['bpub_date'] #界面右侧过滤栏
+    search_fields = ['btitle'] #以bittle搜索框
+```
+
+models.py中:  
+```python
+class BookInfo(models.Model):  # 必须继承于model.Model才行
+    """图书模型类"""
+    # 图书名称 CharField 说明是字符串 max_length指定字符串最大长度
+    btitle = models.CharField(verbose_name = '书名', max_length=20)
+    # 图书出版日期 DateField日期类型
+    bpub_date = models.DateField(verbose_name = '出版日期')
+    # 阅读量
+    bread = models.IntegerField(default=0)
+    # 评论量
+    bcomment = models.IntegerField(default=0)
+    # 删除标记 不做真正的删除 软删除
+    isDelete = models.BooleanField(default=False)
+    # 加这个可以使用BookInfo.object. 不加不行
+    objects = BookInfoManage()  # 管理类 自定义
+
+
+    def title(self): #title方法 用于admin.py
+        return self.btitle
+    title.admin_order_field = 'btitle' #按照btitle排序
+    title.short_description = '书名(方法)'# 指定标题显示名称
+```
+
+## 分页
+Paginator对象--p65
+
+## 获取省市县案例
+p67
+
+
+
+
+
+
+
 
 
 
@@ -756,6 +876,10 @@ return HttpResponse('获取session:'+username+':'+str(age))
 ```python
 return HttpResponse('获取session:',username,':',str(age))
 ```
+
+## 中间件报错: TypeError: object() takes no parameters
+[解决方法](https://blog.csdn.net/qq_23996069/article/details/104922501?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task)
+或者[解决方法](https://blog.csdn.net/weixin_44222965/article/details/86841726)
 
 
 

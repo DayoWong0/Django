@@ -52,6 +52,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'booktest.middleware.BlockedIPSMiddleware', # 中间件注类
+    # 'booktest.middleware.TestMiddleware',
+    'booktest.middleware.ExceptionTest1Middleware',
+    'booktest.middleware.ExceptionTest2Middleware',
+
+
+
 ]
 
 ROOT_URLCONF = 'mysite.urls'

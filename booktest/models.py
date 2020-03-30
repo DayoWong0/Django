@@ -45,9 +45,9 @@ class BookInfoManage(models.Manager):  # 自定义管理类
 class BookInfo(models.Model):  # 必须继承于model.Model才行
     """图书模型类"""
     # 图书名称 CharField 说明是字符串 max_length指定字符串最大长度
-    btitle = models.CharField(max_length=20)
+    btitle = models.CharField(verbose_name = '书名', max_length=20)
     # 图书出版日期 DateField日期类型
-    bpub_date = models.DateField()
+    bpub_date = models.DateField(verbose_name = '出版日期')
     # 阅读量
     bread = models.IntegerField(default=0)
     # 评论量
@@ -56,6 +56,18 @@ class BookInfo(models.Model):  # 必须继承于model.Model才行
     isDelete = models.BooleanField(default=False)
     # 加这个可以使用BookInfo.object. 不加不行
     objects = BookInfoManage()  # 管理类 自定义
+
+
+    def title(self): #title方法 用于admin.py
+        return self.btitle
+    title.admin_order_field = 'btitle' #按照btitle排序
+    title.short_description = '书名(方法)'# 指定标题显示名称
+    
+    
+
+
+
+
 
     # # 指定数据表表名
     # class Meta:
