@@ -592,7 +592,7 @@ for语句
 ```
 2.标签:  
     autoescape标签关闭转义(off关闭转义,on打开):<br>
-    {% autoescape off %}
+    {% autoescape off %}  
         {{content}}<br>
     {% endautoescape %}
 
@@ -879,8 +879,8 @@ return HttpResponse('获取session:',username,':',str(age))
 ```
 
 ## 中间件报错: TypeError: object() takes no parameters
-[解决方法](https://blog.csdn.net/qq_23996069/article/details/104922501?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task)
-或者[解决方法](https://blog.csdn.net/weixin_44222965/article/details/86841726)
+[解决方法1](https://blog.csdn.net/qq_23996069/article/details/104922501?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task)
+或者[解决方法2](https://blog.csdn.net/weixin_44222965/article/details/86841726)
 
 
 
