@@ -3,6 +3,7 @@
 Django学习
 
 [视频地址](https://www.bilibili.com/video/BV1Tx411d7E7/?p=29&t=285)
+[官方文档](https://docs.djangoproject.com/zh-hans/3.0/topics/)
 
 ## md使用 
 Markdown  
